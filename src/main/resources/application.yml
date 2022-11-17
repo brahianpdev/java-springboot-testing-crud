@@ -1,0 +1,42 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  # Database Service
+  environments:
+    - .env
+  datasource:
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    url: ${DB_JDBC_URL}
+
+  #JPA Service
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+  # Mailing Service (NPM: Maildev)
+  mail:
+    host: ${MAILDEV_HOST}
+    port: ${MAILDEV_PORT}
+    username: ${MAILDEV_USERNAME}
+    password: ${MAILDEV_PASSWORD}
+
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
